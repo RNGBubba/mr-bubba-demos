@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo CRM — Hermes Data Services</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  color: #e0e0e0;
+  min-height: 100vh;
+}
+header {
+  background: rgba(15,12,41,0.9);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+header h1 {
+  font-size: 1.3rem;
+  background: linear-gradient(120deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+header nav a {
+  color: #a0a0c0;
+  text-decoration: none;
+  margin-left: 20px;
+  font-size: 0.9rem;
+}
+header nav a:hover { color: white; }
+.demo-badge {
+  display: inline-block;
+  background: #ff6b6b;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-left: 8px;
+}
+.cta-banner {
+  background: linear-gradient(120deg, #667eea, #764ba2);
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-size: 0.95rem;
+}
+.cta-banner a { color: #ffd700; text-decoration: underline; }
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 20px;
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.stat-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 20px;
+}
+.stat-card h3 {
+  color: #a0a0c0;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.stat-card .value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+}
+.toolbar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.toolbar input, ..toolbar select {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  outline: none;
+}
+.toolbar input { flex: 1; min-width: 200px; }
+.toolbar input::placeholder { color: #777; }
+.toolbar select { cursor: pointer; }
+.toolbar select option { background: #302b63; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255,255,255,0.03);
+  border-radius: 12px;
+  overflow: hidden;
+}
+th {
+  background: rgba(102,126,234,0.15);
+  color: #a0a0c0;
+  text-align: left;
+  padding: 14px 16px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+td {
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-size: 0.9rem;
+}
+tr:hover td { background: rgba(102,126,234,0.05); }
+.status {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.status.active { background: rgba(46,213,115,0.2); color: #2ed573; }
+.status.prospect { background: rgba(255,165,2,0.2); color: #ffa502; }
+.status.lead { background: rgba(102,126,234,0.2); color: #667eea; }
+.status.inactive { background: rgba(255,107,107,0.2); color: #ff6b6b; }
+.deal-pipeline {
+  margin-top: 32px;
+}
+.deal-pipeline h2 {
+  font-size: 1.2rem;
+  margin-bottom: 16px;
+  color: white;
+}
+.pipeline-stages {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.pipeline-stage {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 16px;
+}
+.pipeline-stage h4 {
+  font-size: 0.85rem;
+  color: #a0a0c0;
+  margin-bottom: 12px;
+}
+.deal {
+  background: rgba(255,255,255,0.05);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+}
+.deal .amount {
+  color: #2ed573;
+  font-weight: 700;
+  float: right;
+}
+@media (max-width: 768px) {
+  .pipeline-stages { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<div class="cta-banner">
+  🚀 This is a DEMO with sample data — <a href="mailto:hello@hermesdataservices.com">Hire me to build your own CRM</a>
+</div>
+
+<header>
+  <h1>👥 Demo CRM <span class="demo-badge">DEMO</span></h1>
+  <nav>
+    <a href="index.html">← Back</a>
+    <a href="booking.html">Booking</a>
+    <a href="analytics.html">Analytics</a>
+    <a href="portal.html">Portal</a>
+  </nav>
+</header>
+
+<div class="container">
+  <div class="stats">
+    <div class="stat-card">
+      <h3>Total Customers</h3>
+      <div class="value">248</div>
+    </div>
+    <div class="stat-card">
+      <h3>Active Deals</h3>
+      <div class="value">42</div>
+    </div>
+    <div class="stat-card">
+      <h3>Revenue Pipeline</h3>
+      <div class="value">$1.2M</div>
+    </div>
+    <div class="stat-card">
+      <h3>Conversion Rate</h3>
+      <div class="value">34%</div>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <input type="text" id="searchInput" placeholder="Search customers by name, email, or company...">
+    <select id="statusFilter">
+      <option value="">All Statuses</option>
+      <option value="active">Active</option>
+      <option value="prospect">Prospect</option>
+      <option value="lead">Lead</option>
+      <option value="inactive">Inactive</option>
+    </select>
+    <select id="sortFilter">
+      <option value="name">Sort by Name</option>
+      <option value="company">Sort by Company</option>
+      <option value="value">Sort by Value</option>
+    </select>
+  </div>
+
+  <table id="customerTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Company</th>
+        <th>Phone</th>
+        <th>Status</th>
+        <th>Deal Value</th>
+      </tr>
+    </thead>
+    <tbody id="customerBody"></tbody>
+  </table>
+
+  <div class="deal-pipeline">
+    <h2>📊 Deal Pipeline <span class="demo-badge" style="font-size:0.7rem">SAMPLE DATA</span></h2>
+    <div class="pipeline-stages" id="pipeline"></div>
+  </div>
+</div>
+
+<script>
+const customers = [
+  { id: 1, name: 'Sarah Johnson', email: 'sarah@example.com', company: 'Acme Corp', phone: '(555) 123-4567', status: 'active', value: 45000, stage: 'negotiation' },
+  { id: 2, name: 'Michael Chen', email: 'mchen@techco.io', company: 'TechCo Industries', phone: '(555) 234-5678', status: 'active', value: 82000, stage: 'proposal' },
+  { id: 3, name: 'Emily Rodriguez', email: 'emily@startup.ly', company: 'Startup.ly', phone: '(555) 345-6789', status: 'lead', value: 28000, stage: 'qualified' },
+  { id: 4, name: 'David Kim', email: 'dkim@global.net', company: 'Global Networks', phone: '(555) 456-7890', status: 'active', value: 120000, stage: 'closed-won' },
+  { id: 5, name: 'Lisa Thompson', email: 'lisa@firma.co', company: 'Firma & Associates', phone: '(555) 567-8901', status: 'prospect', value: 15000, stage: 'lead' },
+  { id: 6, name: 'James Wilson', email: 'jwilson@megacorp.com', company: 'MegaCorp', phone: '(555) 678-9012', status: 'inactive', value: 0, stage: 'lead' },
+  { id: 7, name: 'Anna Petrov', email: 'anna@dataflow.org', company: 'DataFlow Solutions', phone: '(555) 789-0123', status: 'active', value: 67000, stage: 'negotiation' },
+  { id: 8, name: 'Robert Hayes', email: 'rhayes@cloudnine.io', company: 'CloudNine Systems', phone: '(555) 890-1234', status: 'lead', value: 34000, stage: 'qualified' },
+  { id: 9, name: 'Maria Garcia', email: 'maria@innovate.co', company: 'InnovateCo', phone: '(555) 901-2345', status: 'active', value: 93000, stage: 'proposal' },
+  { id: 10, name: 'Thomas Brown', email: 'tbrown@bluechip.com', company: 'BlueChip Ventures', phone: '(555) 012-3456', status: 'prospect', value: 22000, stage: 'lead' },
+  { id: 11, name: 'Jennifer Lee', email: 'jlee@pinnacle.io', company: 'Pinnacle Tech', phone: '(555) 111-2222', status: 'active', value: 156000, stage: 'closed-won' },
+  { id: 12, name: 'Chris Anderson', email: 'canderson@nextgen.co', company: 'NextGen Labs', phone: '(555) 333-4444', status: 'lead', value: 41000, stage: 'qualified' },
+];
+
+const stages = [
+  { id: 'lead', label: 'Leads' },
+  { id: 'qualified', label: 'Qualified' },
+  { id: 'proposal', label: 'Proposal' },
+  { id: 'negotiation', label: 'Negotiation' },
+  { id: 'closed-won', label: 'Closed Won' },
+];
+
+function renderTable(data) {
+  const tbody = document.getElementById('customerBody');
+  tbody.innerHTML = data.map(c => `
+    <tr>
+      <td><strong>${c.name}</strong></td>
+      <td>${c.email}</td>
+      <td>${c.company}</td>
+      <td>${c.phone}</td>
+      <td><span class="status ${c.status}">${c.status.charAt(0).toUpperCase() + c.status.slice(1)}</span></td>
+      <td>${c.value > 0 ? '$' + c.value.toLocaleString() : '—'}</td>
+    </tr>
+  `).join('');
+}
+
+function renderPipeline() {
+  const container = document.getElementById('pipeline');
+  container.innerHTML = stages.map(stage => {
+    const deals = customers.filter(c => c.stage === stage.id);
+    const total = deals.reduce((sum, d) => sum + d.value, 0);
+    return `
+      <div class="pipeline-stage">
+        <h4>${stage.label} <span style="color:#2ed573">(${deals.length})</span></h4>
+        ${deals.length === 0 ? '<div style="color:#555;font-size:0.8rem">No deals</div>' : 
+          deals.map(d => `<div class="deal">${d.company}<span class="amount">$${d.value.toLocaleString()}</span></div>`).join('')}
+        <div style="margin-top:12px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.1);font-size:0.85rem;color:#2ed573;font-weight:600;">
+          Total: $${total.toLocaleString()}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function filterAndSort() {
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  const statusFilter = document.getElementById('statusFilter').value;
+  const sortFilter = document.getElementById('sortFilter').value;
+
+  let filtered = customers.filter(c => {
+    const matchSearch = !search || c.name.toLowerCase().includes(search) || c.email.toLowerCase().includes(search) || c.company.toLowerCase().includes(search);
+    const matchStatus = !statusFilter || c.status === statusFilter;
+    return matchSearch && matchStatus;
+  });
+
+  filtered.sort((a, b) => {
+    if (sortFilter === 'name') return a.name.localeCompare(b.name);
+    if (sortFilter === 'company') return a.company.localeCompare(b.company);
+    if (sortFilter === 'value') return b.value - a.value;
+    return 0;
+  });
+
+  renderTable(filtered);
+}
+
+document.getElementById('searchInput').addEventListener('input', filterAndSort);
+document.getElementById('statusFilter').addEventListener('change', filterAndSort);
+document.getElementById('sortFilter').addEventListener('change', filterAndSort);
+
+renderTable(customers);
+renderPipeline();
+</script>
+
+</body>
+</html>

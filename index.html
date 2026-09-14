@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hermes Data Services — Web App Demos</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  color: #e0e0e0;
+  min-height: 100vh;
+}
+header {
+  text-align: center;
+  padding: 40px 20px 20px;
+}
+header h1 {
+  font-size: 2.5rem;
+  background: linear-gradient(120deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 10px;
+}
+header p {
+  color: #a0a0c0;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+.demo-badge {
+  display: inline-block;
+  background: #ff6b6b;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-left: 8px;
+}
+.cta-banner {
+  background: linear-gradient(120deg, #667eea, #764ba2);
+  color: white;
+  text-align: center;
+  padding: 14px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.cta-banner a {
+  color: #ffd700;
+  text-decoration: underline;
+  margin-left: 8px;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+.card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 32px 24px;
+  text-decoration: none;
+  color: #e0e0e0;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(102,126,234,0.3);
+  border-color: #667eea;
+}
+.card .icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+.card h2 {
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+  color: white;
+}
+.card p {
+  color: #a0a0c0;
+  line-height: 1.6;
+  flex-grow: 1;
+  margin-bottom: 16px;
+}
+.card .btn {
+  display: inline-block;
+  background: linear-gradient(120deg, #667eea, #764ba2);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 600;
+  align-self: flex-start;
+  text-decoration: none;
+}
+footer {
+  text-align: center;
+  padding: 30px;
+  color: #666;
+  font-size: 0.9rem;
+}
+</style>
+</head>
+<body>
+
+<div class="cta-banner">
+  🚀 These are interactive demos — <a href="mailto:hello@hermesdataservices.com">Hire me to build your own</a> ✨
+</div>
+
+<header>
+  <h1>Hermes Data Services <span class="demo-badge">DEMO</span></h1>
+  <p>Interactive Web App Prototypes — Built to Showcase Our Capabilities</p>
+  <p style="color:#ff6b6b; font-weight:600;">All data shown is sample/mock data for demonstration purposes only.</p>
+</header>
+
+<div class="container">
+  <div class="grid">
+    <a href="crm.html" class="card">
+      <div class="icon">👥</div>
+      <h2>Demo CRM</h2>
+      <p>Customer management dashboard with sample contacts, deal pipeline, search, and filtering. Shows how a real CRM could look for your business.</p>
+      <span class="btn">Open Demo →</span>
+    </a>
+    <a href="booking.html" class="card">
+      <div class="icon">📅</div>
+      <h2>Demo Booking System</h2>
+      <p>Interactive calendar with appointment slots, time selection, and booking confirmation. Perfect for service-based businesses.</p>
+      <span class="btn">Open Demo →</span>
+    </a>
+    <a href="analytics.html" class="card">
+      <div class="icon">📊</div>
+      <h2>Demo Analytics Dashboard</h2>
+      <p>Real-time charts and KPIs with sample metrics. Visualize your business data with interactive graphs and trend lines.</p>
+      <span class="btn">Open Demo →</span>
+    </a>
+    <a href="portal.html" class="card">
+      <div class="icon">🔐</div>
+      <h2>Demo Customer Portal</h2>
+      <p>Login-protected portal with account overview, invoices, and support tickets. See what your customers would experience.</p>
+      <span class="btn">Open Demo →</span>
+    </a>
+  </div>
+</div>
+
+<footer>
+  © 2026 Hermes Data Services — All demos use sample data. <a href="mailto:hello@hermesdataservices.com" style="color:#667eea;">Contact us for a custom build.</a>
+</footer>
+
+</body>
+</html>

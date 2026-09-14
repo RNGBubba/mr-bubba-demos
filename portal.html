@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo Customer Portal — Hermes Data Services</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  color: #e0e0e0;
+  min-height: 100vh;
+}
+header {
+  background: rgba(15,12,41,0.9);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+header h1 {
+  font-size: 1.3rem;
+  background: linear-gradient(120deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+header nav a {
+  color: #a0a0c0;
+  text-decoration: none;
+  margin-left: 20px;
+  font-size: 0.9rem;
+}
+header nav a:hover { color: white; }
+.demo-badge {
+  display: inline-block;
+  background: #ff6b6b;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-left: 8px;
+}
+.cta-banner {
+  background: linear-gradient(120deg, #667eea, #764ba2);
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-size: 0.95rem;
+}
+.cta-banner a { color: #ffd700; text-decoration: underline; }
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 200px);
+  padding: 40px 20px;
+}
+.login-box {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 40px;
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+}
+.login-box .icon {
+  font-size: 4rem;
+  margin-bottom: 16px;
+}
+.login-box h2 {
+  color: white;
+  font-size: 1.6rem;
+  margin-bottom: 8px;
+}
+.login-box p {
+  color: #a0a0c0;
+  margin-bottom: 24px;
+  font-size: 0.95rem;
+}
+.form-group { margin-bottom: 16px; text-align: left; }
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.85rem;
+  color: #a0a0c0;
+}
+.form-group input {
+  width: 100%;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: white;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.form-group input:focus { border-color: #667eea; }
+.login-btn {
+  width: 100%;
+  background: linear-gradient(120deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: opacity 0.2s;
+}
+.login-btn:hover { opacity: 0.9; }
+.demo-hint {
+  background: rgba(255,107,107,0.1);
+  border: 1px solid rgba(255,107,107,0.3);
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 20px;
+  font-size: 0.8rem;
+  color: #ff6b6b;
+  text-align: left;
+}
+.demo-hint strong { color: white; }
+
+/* Dashboard styles */
+.portal-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 20px;
+}
+.welcome {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.welcome h2 {
+  color: white;
+  font-size: 1.4rem;
+  margin-bottom: 4px;
+}
+.welcome p { color: #a0a0c0; font-size: 0.95rem; }
+.welcome .account-badge {
+  display: inline-block;
+  background: rgba(46,213,115,0.15);
+  color: #2ed573;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-top: 8px;
+}
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+.card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 24px;
+}
+.card h3 {
+  color: white;
+  font-size: 1rem;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.invoice-item, .ticket-item {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.invoice-item .amount {
+  color: #2ed573;
+  font-weight: 700;
+}
+.status-paid {
+  background: rgba(46,213,115,0.15);
+  color: #2ed573;
+  padding: 3px 10px;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.status-pending {
+  background: rgba(255,165,2,0.15);
+  color: #ffa502;
+  padding: 3px 10px;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.status-open {
+  background: rgba(102,126,234,0.15);
+  color: #667eea;
+  padding: 3px 10px;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.status-resolved {
+  background: rgba(46,213,115,0.15);
+  color: #2ed573;
+  padding: 3px 10px;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.view-all {
+  color: #667eea;
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+.view-all:hover { text-decoration: underline; }
+.logout-btn {
+  background: rgba(255,107,107,0.15);
+  border: 1px solid rgba(255,107,107,0.3);
+  color: #ff6b6b;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.logout-btn:hover { background: rgba(255,107,107,0.25); }
+</style>
+</head>
+<body>
+
+<div class="cta-banner">
+  🚀 This is a DEMO portal — <a href="mailto:hello@hermesdataservices.com">Hire me to build your customer portal</a>
+</div>
+
+<div id="loginView">
+  <header>
+    <h1>🔐 Demo Customer Portal <span class="demo-badge">DEMO</span></h1>
+    <nav>
+      <a href="index.html">← Back</a>
+      <a href="crm.html">CRM</a>
+      <a href="booking.html">Booking</a>
+      <a href="analytics.html">Analytics</a>
+    </nav>
+  </header>
+  
+  <div class="login-container">
+    <div class="login-box">
+      <div class="icon">🔐</div>
+      <h2>Welcome Back</h2>
+      <p>Sign in to your customer portal <span class="demo-badge" style="font-size:0.7rem">DEMO LOGIN</span></p>
+      
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" id="email" placeholder="demo@hermesdataservices.com" value="demo@hermesdataservices.com">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="password" placeholder="Enter any password" value="demo123">
+      </div>
+      <button class="login-btn" onclick="login()">Sign In</button>
+      
+      <div class="demo-hint">
+        <strong>Demo Mode:</strong> Click "Sign In" with any credentials to see the portal. No real authentication — this is a prototype.
+      </div>
+      
+      <p style="margin-top:16px;font-size:0.85rem;color:#777;">
+        <a href="#" style="color:#667eea;">Forgot password?</a> (demo only)
+      </p>
+    </div>
+  </div>
+</div>
+
+<div id="portalView" style="display:none;">
+  <header>
+    <h1>🔐 Customer Portal <span class="demo-badge">DEMO</span></h1>
+    <nav>
+      <span style="color:#a0a0c0;margin-right:16px;">Welcome, <strong id="userName" style="color:white;">Demo User</strong></span>
+      <a href="index.html">← Back</a>
+      <a href="#" class="logout-btn" onclick="logout()">Logout</a>
+    </nav>
+  </header>
+  
+  <div class="portal-container">
+    <div class="welcome">
+      <h2>👋 Hello, Demo User!</h2>
+      <p>Here's your account overview. This is sample data for demonstration purposes.</p>
+      <div class="account-badge">✓ Active Account</div>
+    </div>
+    
+    <div class="grid-3">
+      <div class="card">
+        <h3>📄 Invoices <a href="#" class="view-all">View All →</a></h3>
+        <div class="invoice-item">
+          <div>
+            <strong>INV-2026-001</strong>
+            <div style="color:#777;font-size:0.8rem">Jan 15, 2026</div>
+          </div>
+          <div>
+            <div class="amount">$1,250.00</div>
+            <span class="status-paid">Paid</span>
+          </div>
+        </div>
+        <div class="invoice-item">
+          <div>
+            <strong>INV-2026-002</strong>
+            <div style="color:#777;font-size:0.8rem">Feb 15, 2026</div>
+          </div>
+          <div>
+            <div class="amount">$1,250.00</div>
+            <span class="status-paid">Paid</span>
+          </div>
+        </div>
+        <div class="invoice-item">
+          <div>
+            <strong>INV-2026-003</strong>
+            <div style="color:#777;font-size:0.8rem">Mar 15, 2026</div>
+          </div>
+          <div>
+            <div class="amount">$1,450.00</div>
+            <span class="status-pending">Pending</span>
+          </div>
+        </div>
+        <div class="invoice-item">
+          <div>
+            <strong>INV-2026-004</strong>
+            <div style="color:#777;font-size:0.8rem">Apr 15, 2026</div>
+          </div>
+          <div>
+            <div class="amount">$1,250.00</div>
+            <span class="status-pending">Pending</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card">
+        <h3>🎫 Support Tickets <a href="#" class="view-all">View All →</a></h3>
+        <div class="ticket-item">
+          <div>
+            <strong>#TICK-1042</strong>
+            <div style="color:#777;font-size:0.8rem">API rate limiting issue</div>
+          </div>
+          <span class="status-open">Open</span>
+        </div>
+        <div class="ticket-item">
+          <div>
+            <strong>#TICK-1038</strong>
+            <div style="color:#777;font-size:0.8rem">Dashboard loading slowly</div>
+          </div>
+          <span class="status-resolved">Resolved</span>
+        </div>
+        <div class="ticket-item">
+          <div>
+            <strong>#TICK-1035</strong>
+            <div style="color:#777;font-size:0.8rem">Webhook configuration</div>
+          </div>
+          <span class="status-resolved">Resolved</span>
+        </div>
+        <div class="ticket-item">
+          <div>
+            <strong>#TICK-1040</strong>
+            <div style="color:#777;font-size:0.8rem">Export to CSV not working</div>
+          </div>
+          <span class="status-open">Open</span>
+        </div>
+      </div>
+      
+      <div class="card">
+        <h3>📊 Usage Summary <span class="demo-badge" style="font-size:0.7rem">SAMPLE</span></h3>
+        <div style="margin-bottom:16px;">
+          <div style="display:flex;justify-content:space-between;font-size:0.9rem;margin-bottom:6px;">
+            <span>API Calls</span>
+            <span style="color:#2ed573;font-weight:600">12,450 / 50,000</span>
+          </div>
+          <div style="background:rgba(255,255,255,0.1);border-radius:6px;height:8px;overflow:hidden;">
+            <div style="background:linear-gradient(90deg,#667eea,#2ed573);height:100%;width:24.9%;border-radius:6px;"></div>
+          </div>
+        </div>
+        <div style="margin-bottom:16px;">
+          <div style="display:flex;justify-content:space-between;font-size:0.9rem;margin-bottom:6px;">
+            <span>Storage</span>
+            <span style="color:#ffa502;font-weight:600">3.2 GB / 10 GB</span>
+          </div>
+          <div style="background:rgba(255,255,255,0.1);border-radius:6px;height:8px;overflow:hidden;">
+            <div style="background:linear-gradient(90deg,#667eea,#ffa502);height:100%;width:32%;border-radius:6px;"></div>
+          </div>
+        </div>
+        <div style="margin-bottom:16px;">
+          <div style="display:flex;justify-content:space-between;font-size:0.9rem;margin-bottom:6px;">
+            <span>Team Seats</span>
+            <span style="color:#667eea;font-weight:600">4 / 10</span>
+          </div>
+          <div style="background:rgba(255,255,255,0.1);border-radius:6px;height:8px;overflow:hidden;">
+            <div style="background:#667eea;height:100%;width:40%;border-radius:6px;"></div>
+          </div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:0.9rem;margin-bottom:6px;">
+            <span>Projects</span>
+            <span style="color:#764ba2;font-weight:600">7 Active</span>
+          </div>
+        </div>
+        <div style="margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.1);">
+          <div style="font-size:0.85rem;color:#a0a0c0;">Current Plan</div>
+          <div style="font-size:1.1rem;color:white;font-weight:700;">Professional</div>
+          <div style="font-size:0.85rem;color:#764ba2;margin-top:4px;">$99/month · Renews Apr 15</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Check for saved session on load
+if (localStorage.getItem('portalLoggedIn') === 'true') {
+  showPortal();
+}
+
+function login() {
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  
+  if (email && password) {
+    localStorage.setItem('portalLoggedIn', 'true');
+    localStorage.setItem('portalEmail', email);
+    showPortal();
+  } else {
+    alert('Please enter both email and password (any values work in demo).');
+  }
+}
+
+function showPortal() {
+  document.getElementById('loginView').style.display = 'none';
+  document.getElementById('portalView').style.display = 'block';
+  const email = localStorage.getItem('portalEmail') || 'demo@hermesdataservices.com';
+  const name = email.split('@')[0];
+  document.getElementById('userName').textContent = name.charAt(0).toUpperCase() + name.slice(1);
+}
+
+function logout() {
+  localStorage.removeItem('portalLoggedIn');
+  localStorage.removeItem('portalEmail');
+  document.getElementById('portalView').style.display = 'none';
+  document.getElementById('loginView').style.display = 'block';
+  document.getElementById('email').value = 'demo@hermesdataservices.com';
+  document.getElementById('password').value = 'demo123';
+}
+</script>
+
+</body>
+</html>
