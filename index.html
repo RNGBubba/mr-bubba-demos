@@ -3,161 +3,309 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hermes Data Services — Web App Demos</title>
+<title>Web App Demos — Hermes Data Services</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
+:root { --bg: #000000; --surface: #0a0a0a; --surface-2: #141414; --border: #1f1f1f; --text: #fafafa; --text-2: #888888; --text-3: #555555; --accent: #3b82f6; --accent-2: #22c55e; --radius: 16px; --max-width: 1280px; }
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-  color: #e0e0e0;
-  min-height: 100vh;
-}
-header {
-  text-align: center;
-  padding: 40px 20px 20px;
-}
-header h1 {
-  font-size: 2.5rem;
-  background: linear-gradient(120deg, #667eea, #764ba2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 10px;
-}
-header p {
-  color: #a0a0c0;
-  font-size: 1.1rem;
-  margin-bottom: 8px;
-}
-.demo-badge {
-  display: inline-block;
-  background: #ff6b6b;
-  color: white;
-  padding: 4px 12px;
-  border-radius: 12px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  margin-left: 8px;
-}
-.cta-banner {
-  background: linear-gradient(120deg, #667eea, #764ba2);
-  color: white;
-  text-align: center;
-  padding: 14px;
-  font-size: 1.05rem;
-  font-weight: 600;
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+.mono { font-family: 'JetBrains Mono', monospace; }
+.serif { font-family: 'Playfair Display', serif; }
+
+/* Sticky CTA Banner */
+.cta-banner-custom {
   position: sticky;
   top: 0;
   z-index: 100;
+  background: linear-gradient(135deg, #1e3a5f 0%, #0a1929 50%, #1a0a2e 100%);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 14px 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
-.cta-banner a {
-  color: #ffd700;
-  text-decoration: underline;
-  margin-left: 8px;
+.cta-banner-custom .banner-icon {
+  color: #fbbf24;
+  font-size: 16px;
 }
-.container {
-  max-width: 1200px;
+.cta-banner-custom a {
+  color: #fbbf24;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 6px 14px;
+  border: 1px solid rgba(251,191,36,0.3);
+  border-radius: 6px;
+  transition: all 0.2s;
+  margin-left: 4px;
+}
+.cta-banner-custom a:hover {
+  background: rgba(251,191,36,0.1);
+  border-color: #fbbf24;
+  color: #fff;
+}
+
+/* Nav */
+.nav {
+  position: sticky;
+  top: 49px;
+  z-index: 99;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 0;
+}
+.nav-inner {
+  max-width: var(--max-width);
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 0 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.grid {
+.nav-logo {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+}
+.nav-links {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+.nav-links a {
+  color: var(--text-2);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.nav-links a:hover {
+  color: var(--text);
+}
+
+/* Hero */
+.hero {
+  padding: 100px 32px 80px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  text-align: center;
+}
+.hero-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 24px;
+}
+.hero h1 {
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.hero h1 .serif {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--text-2);
+}
+.hero-subtitle {
+  font-size: 18px;
+  color: var(--text-2);
+  max-width: 600px;
+  margin: 0 auto 32px;
+  line-height: 1.6;
+}
+
+/* Cards Grid */
+.section {
+  padding: 40px 32px 80px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+.cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 24px;
 }
 .card {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 16px;
-  padding: 32px 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 36px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
   text-decoration: none;
-  color: #e0e0e0;
-  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  color: var(--text);
   display: flex;
   flex-direction: column;
 }
 .card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 40px rgba(102,126,234,0.3);
-  border-color: #667eea;
+  border-color: var(--text-3);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
 }
-.card .icon {
-  font-size: 3rem;
-  margin-bottom: 16px;
+.card-icon {
+  width: 48px;
+  height: 48px;
+  background: var(--surface-2);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: var(--accent);
+  margin-bottom: 24px;
 }
-.card h2 {
-  font-size: 1.4rem;
-  margin-bottom: 8px;
-  color: white;
+.card h3 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
 }
 .card p {
-  color: #a0a0c0;
-  line-height: 1.6;
+  color: var(--text-2);
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 24px;
   flex-grow: 1;
-  margin-bottom: 16px;
 }
-.card .btn {
-  display: inline-block;
-  background: linear-gradient(120deg, #667eea, #764ba2);
-  color: white;
-  padding: 10px 20px;
-  border-radius: 8px;
-  text-align: center;
+.card-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 10px;
+  font-size: 15px;
   font-weight: 600;
-  align-self: flex-start;
   text-decoration: none;
+  transition: all 0.2s;
+  background: var(--text);
+  color: var(--bg);
+  border: none;
+  cursor: pointer;
+  align-self: flex-start;
 }
-footer {
-  text-align: center;
-  padding: 30px;
-  color: #666;
-  font-size: 0.9rem;
+.card-btn:hover {
+  background: #e0e0e0;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 60px 32px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.footer-text {
+  color: var(--text-3);
+  font-size: 14px;
+}
+.footer-links {
+  display: flex;
+  gap: 24px;
+}
+.footer-links a {
+  color: var(--text-2);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+.footer-links a:hover {
+  color: var(--text);
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .cards { grid-template-columns: 1fr; }
+  .hero { padding: 80px 24px 60px; }
 }
 </style>
 </head>
 <body>
 
-<div class="cta-banner">
-  🚀 These are interactive demos — <a href="mailto:hello@hermesdataservices.com">Hire me to build your own</a> ✨
+<div class="cta-banner-custom">
+  <span class="banner-icon"><i class="fas fa-rocket"></i></span>
+  <span>Want a custom web app?</span>
+  <a href="https://rngbubba.github.io/hermes-store/" target="_blank" rel="noopener noreferrer">Get a free quote →</a>
 </div>
 
-<header>
-  <h1>Hermes Data Services <span class="demo-badge">DEMO</span></h1>
-  <p>Interactive Web App Prototypes — Built to Showcase Our Capabilities</p>
-  <p style="color:#ff6b6b; font-weight:600;">All data shown is sample/mock data for demonstration purposes only.</p>
-</header>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Hermes Demos</a>
+    <div class="nav-links">
+      <a href="crm.html">CRM</a>
+      <a href="booking.html">Booking</a>
+      <a href="analytics.html">Analytics</a>
+      <a href="portal.html">Portal</a>
+    </div>
+  </div>
+</nav>
 
-<div class="container">
-  <div class="grid">
+<section class="hero">
+  <div class="hero-label mono">Interactive Prototypes</div>
+  <h1>See what <span class="serif">we can build</span> for you</h1>
+  <p class="hero-subtitle">Interactive demos of web applications tailored to your business needs. All data shown is sample data for demonstration purposes.</p>
+</section>
+
+<section class="section">
+  <div class="cards">
     <a href="crm.html" class="card">
-      <div class="icon">👥</div>
-      <h2>Demo CRM</h2>
-      <p>Customer management dashboard with sample contacts, deal pipeline, search, and filtering. Shows how a real CRM could look for your business.</p>
-      <span class="btn">Open Demo →</span>
+      <div class="card-icon"><i class="fas fa-users"></i></div>
+      <h3>CRM System</h3>
+      <p>Customer management dashboard with contacts, deal pipeline, search, and filtering. See how a real CRM could look for your business.</p>
+      <span class="card-btn">Open Demo →</span>
     </a>
     <a href="booking.html" class="card">
-      <div class="icon">📅</div>
-      <h2>Demo Booking System</h2>
+      <div class="card-icon"><i class="fas fa-calendar-check"></i></div>
+      <h3>Booking System</h3>
       <p>Interactive calendar with appointment slots, time selection, and booking confirmation. Perfect for service-based businesses.</p>
-      <span class="btn">Open Demo →</span>
+      <span class="card-btn">Open Demo →</span>
     </a>
     <a href="analytics.html" class="card">
-      <div class="icon">📊</div>
-      <h2>Demo Analytics Dashboard</h2>
+      <div class="card-icon"><i class="fas fa-chart-pie"></i></div>
+      <h3>Analytics Dashboard</h3>
       <p>Real-time charts and KPIs with sample metrics. Visualize your business data with interactive graphs and trend lines.</p>
-      <span class="btn">Open Demo →</span>
+      <span class="card-btn">Open Demo →</span>
     </a>
     <a href="portal.html" class="card">
-      <div class="icon">🔐</div>
-      <h2>Demo Customer Portal</h2>
+      <div class="card-icon"><i class="fas fa-user-shield"></i></div>
+      <h3>Customer Portal</h3>
       <p>Login-protected portal with account overview, invoices, and support tickets. See what your customers would experience.</p>
-      <span class="btn">Open Demo →</span>
+      <span class="card-btn">Open Demo →</span>
     </a>
   </div>
-</div>
+</section>
 
-<footer>
-  © 2026 Hermes Data Services — All demos use sample data. <a href="mailto:hello@hermesdataservices.com" style="color:#667eea;">Contact us for a custom build.</a>
+<footer class="footer">
+  <div class="footer-text">© 2026 Hermes Data Services — All demos use sample data</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="crm.html">CRM</a>
+    <a href="booking.html">Booking</a>
+    <a href="analytics.html">Analytics</a>
+    <a href="portal.html">Portal</a>
+  </div>
 </footer>
 
 </body>
